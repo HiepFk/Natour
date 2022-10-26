@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.10",
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -44,6 +45,10 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie 11",
+      "not chrome < 51",
+      "not safari < 10",
+      "not android < 51",
       "not op_mini all"
     ],
     "development": [

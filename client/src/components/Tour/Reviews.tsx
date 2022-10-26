@@ -9,8 +9,6 @@ export default function Reviews({ reviews }: ReviewType) {
     <section className="section-reviews">
       <div className="reviews">
         {reviews?.map((item) => {
-          console.log(item?.user);
-
           return (
             <div className="reviews__card" key={item?._id}>
               <div className="reviews__avatar">
