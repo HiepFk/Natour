@@ -1,6 +1,5 @@
 import React from "react";
 import { Review } from "../../models/ReviewModel";
-
 interface ReviewType {
   reviews: Review[] | undefined;
 }
@@ -15,7 +14,7 @@ export default function Reviews({ reviews }: ReviewType) {
               <div className="reviews__avatar">
                 <img
                   src={item?.user?.photo}
-                  alt=""
+                  alt={item?.review}
                   className="reviews__avatar-img"
                 />
                 <h6 className="reviews__user">{item?.user?.name}</h6>
