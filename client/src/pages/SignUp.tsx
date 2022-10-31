@@ -23,7 +23,7 @@ export default function SignUp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signUp(form, dispatch, navigate);
+    signUp(form, dispatch);
     setForm(state);
   };
 

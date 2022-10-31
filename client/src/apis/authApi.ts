@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosInstance} from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
 import {
@@ -24,7 +24,7 @@ const link = process.env.REACT_APP_API_LINK;
 
 export const signInWithGoogle = async (
   dispatch: Dispatch<Action<unknown>>,
-  navigate: any
+  navigate: NavigateFunction
 ) => {
   dispatch(LoginStart());
   signInWithPopup(auth, provider)
@@ -49,14 +49,14 @@ export const signInWithGoogle = async (
 export const signUp = async (
   user: any,
   dispatch: Dispatch<Action<unknown>>,
-  navigate: any
 ) => {
   dispatch(SignUpStart());
   try {
     const res = await axios.post(`${link}/v1/user/signup`, user);
     dispatch(SetAlert(res.data));
-  } catch (error: any) {
+  } catch (error) {
     dispatch(SignUpFailed());
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
@@ -73,14 +73,15 @@ export const activeEmail = async (
     dispatch(SignUpSuccess(res.data));
     dispatch(SetAlert(res.data));
     navigate("/");
-  } catch (error: any) {
+  } catch (error) {
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
 export const loginUser = async (
   user: any,
   dispatch: Dispatch<Action<unknown>>,
-  navigate: any
+  navigate: NavigateFunction
 ) => {
   dispatch(LoginStart());
   try {
@@ -88,8 +89,9 @@ export const loginUser = async (
     dispatch(LoginSuccess(res.data));
     dispatch(SetAlert(res.data));
     navigate("/");
-  } catch (error: any) {
+  } catch (error) {
     dispatch(LoginFailed());
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
@@ -107,7 +109,7 @@ export const logOutUser = async (dispatch: Dispatch<Action<unknown>>) => {
 
 export const GetMe = async (
   dispatch: Dispatch<Action<unknown>>,
-  axiosJWT: any,
+  axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
   dispatch(GetMeStart());
@@ -125,7 +127,7 @@ export const UpdateMe = async (
   dispatch: Dispatch<Action<unknown>>,
   data: any,
   type: string,
-  axiosJWT: any,
+  axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
   dispatch(GetMeStart());
@@ -143,8 +145,9 @@ export const UpdateMe = async (
     });
     dispatch(GetMeSuccess(res.data));
     dispatch(SetAlert(res.data));
-  } catch (error: any) {
+  } catch (error) {
     dispatch(GetMeError());
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
@@ -156,7 +159,8 @@ export const forgotPassword = async (
   try {
     const res = await axios.post(`${link}/v1/user/forgot`, { email });
     dispatch(SetAlert(res.data));
-  } catch (error: any) {
+  } catch (error) {
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
@@ -164,7 +168,7 @@ export const forgotPassword = async (
 export const resetPassword = async (
   data: any,
   dispatch: Dispatch<Action<unknown>>,
-  navigate: any
+  navigate: NavigateFunction
 ) => {
   try {
     const res = await axios.post(`${link}/v1/user/reset`, data);

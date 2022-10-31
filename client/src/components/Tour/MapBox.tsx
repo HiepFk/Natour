@@ -53,9 +53,9 @@ export default function MapBox({ locations }: Locations) {
       <div className="map">
         <Map
           initialViewState={{
-            latitude: locations?.[0]?.coordinates?.[1],
-            longitude: locations?.[0]?.coordinates?.[0],
-            zoom: 5,
+            // latitude: locations?.[0]?.coordinates?.[1],
+            // longitude: locations?.[0]?.coordinates?.[0],
+            zoom: -10,
             bearing: 0,
             pitch: 0,
           }}

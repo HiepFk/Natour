@@ -1,9 +1,6 @@
 import { Action, Dispatch } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 import jwt_decode from "jwt-decode";
-// import { User } from "../models/UserModel";
-import { logOutUser } from "./authApi";
-
 import { SetAlert } from "../redux/alertSlice";
 const link = process.env.REACT_APP_API_LINK;
 
@@ -13,7 +10,8 @@ const refreshToken = async (dispatch: Dispatch<Action<unknown>>) => {
       withCredentials: true,
     });
     return res.data;
-  } catch (err: any) {
+  } catch (err) {
+    // @ts-ignore
     dispatch(SetAlert(err?.response?.data));
   }
 };
@@ -25,10 +23,10 @@ export const createAxios = (
 ) => {
   const newInstance = axios.create();
   newInstance.interceptors.request.use(
-    async (config: any) => {
+    async (config:AxiosRequestConfig) => {
       let date = new Date();
 
-      const decodedToken: any = jwt_decode(user?.accessToken);
+      const decodedToken: any = jwt_decode(user.accessToken);
 
       if (decodedToken.exp < date.getTime() / 1000) {
         const data = await refreshToken(dispatch);
@@ -38,6 +36,7 @@ export const createAxios = (
           accessToken: data?.accessToken,
         };
         dispatch(stateSuccess(refreshUser));
+        // @ts-ignore
         config.headers["token"] = "Bearer " + data.accessToken;
       }
       return config;

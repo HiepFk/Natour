@@ -4,7 +4,6 @@ import { getMyReview } from "../../apis/userAction";
 import { LoginSuccess } from "../../redux/authSlice";
 import { createAxios } from "../../apis/createInstance";
 import Loading from "../Loading";
-import TourCard from "../TourCard";
 import { Link } from "react-router-dom";
 export default function MyReview() {
   const arr: number[] = [1, 2, 3, 4, 5];

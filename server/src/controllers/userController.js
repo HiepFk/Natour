@@ -22,13 +22,13 @@ const userController = {
   createUser: factory.createOne(User),
   updateUser: factory.updateOne(User),
   deleteUser: factory.deleteOne(User),
-  getMe: catchAsync(async (req, res, next) => {
+  getMe: catchAsync(async (req, res) => {
     const user = await User.findById(req.user.id);
-    token = req.headers.token?.split(' ')?.[1];
+    const token = req.headers.token?.split(' ')?.[1];
     const { password, ...others } = user._doc;
     res.status(200).json({
       ...others,
-      accessToken,
+      accessToken :token,
       status: 'success',
     });
   }),
@@ -46,7 +46,7 @@ const userController = {
       new: true,
       runValidators: true,
     });
-    token = req.headers.token?.split(' ')?.[1];
+    const token = req.headers.token?.split(' ')?.[1];
     const { password, ...others } = user._doc;
     res.status(200).json({
       ...others,

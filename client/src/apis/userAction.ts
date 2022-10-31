@@ -1,5 +1,5 @@
 import { Action, Dispatch } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, {AxiosInstance} from "axios";
 import {
   GetMyOrderStart,
   GetMyOrderError,
@@ -16,7 +16,7 @@ const link = process.env.REACT_APP_API_LINK;
 export const ByTour = async (
   data: any,
   dispatch: Dispatch<Action<unknown>>,
-  axiosJWT: any,
+  axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
   try {
@@ -24,7 +24,8 @@ export const ByTour = async (
       headers: { token: `Bearer ${accessToken}` },
     });
     dispatch(SetAlert(res.data));
-  } catch (error: any) {
+  } catch (error) {
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
@@ -32,7 +33,7 @@ export const ByTour = async (
 export const createReivew = async (
   data: any,
   dispatch: Dispatch<Action<unknown>>,
-  axiosJWT: any,
+  axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
   try {
@@ -40,14 +41,15 @@ export const createReivew = async (
       headers: { token: `Bearer ${accessToken}` },
     });
     dispatch(SetAlert(res.data));
-  } catch (error: any) {
+  } catch (error) {
+    // @ts-ignore
     dispatch(SetAlert(error?.response?.data));
   }
 };
 
 export const getMyOrder = async (
   dispatch: Dispatch<Action<unknown>>,
-  axiosJWT: any,
+  axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
   dispatch(GetMyOrderStart());
@@ -62,7 +64,7 @@ export const getMyOrder = async (
 };
 export const getMyReview = async (
   dispatch: Dispatch<Action<unknown>>,
-  axiosJWT: any,
+  axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
   dispatch(GetMyReviewStart());
