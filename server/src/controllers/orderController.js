@@ -28,7 +28,7 @@ const orderController = {
   }),
   getUserOrder: catchAsync(async (req, res) => {
     const order = await Order.find({ user: req.user.id }).populate({
-      path: 'products',
+      path: 'tour',
     });
     res.status(200).json({
       status: 'success',
