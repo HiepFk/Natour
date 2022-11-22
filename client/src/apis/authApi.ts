@@ -1,4 +1,4 @@
-import axios, {AxiosInstance} from "axios";
+import axios, { AxiosInstance } from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
 import {
@@ -16,14 +16,20 @@ import {
   GetMeSuccess,
 } from "../redux/authSlice";
 import { SetAlert } from "../redux/alertSlice";
-import { Action, Dispatch } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  Dispatch,
+  EmptyObject,
+  ThunkDispatch,
+} from "@reduxjs/toolkit";
 import { NavigateFunction } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 const link = process.env.REACT_APP_API_LINK;
 
 export const signInWithGoogle = async (
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   navigate: NavigateFunction
 ) => {
   dispatch(LoginStart());
@@ -47,8 +53,14 @@ export const signInWithGoogle = async (
 };
 
 export const signUp = async (
-  user: any,
-  dispatch: Dispatch<Action<unknown>>,
+  user: {
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    name: string;
+  },
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>
 ) => {
   dispatch(SignUpStart());
   try {
@@ -63,7 +75,8 @@ export const signUp = async (
 
 export const activeEmail = async (
   activation_token: string,
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   navigate: NavigateFunction
 ) => {
   try {
@@ -79,8 +92,9 @@ export const activeEmail = async (
   }
 };
 export const loginUser = async (
-  user: any,
-  dispatch: Dispatch<Action<unknown>>,
+  user: { email: string; password: string },
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   navigate: NavigateFunction
 ) => {
   dispatch(LoginStart());
@@ -96,7 +110,10 @@ export const loginUser = async (
   }
 };
 
-export const logOutUser = async (dispatch: Dispatch<Action<unknown>>) => {
+export const logOutUser = async (
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>
+) => {
   dispatch(LogOutStart());
   try {
     const res = await axios.get(`${link}/v1/user/logout`);
@@ -108,7 +125,8 @@ export const logOutUser = async (dispatch: Dispatch<Action<unknown>>) => {
 };
 
 export const GetMe = async (
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
@@ -124,7 +142,8 @@ export const GetMe = async (
 };
 
 export const UpdateMe = async (
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   data: any,
   type: string,
   axiosJWT: AxiosInstance,
@@ -154,7 +173,8 @@ export const UpdateMe = async (
 
 export const forgotPassword = async (
   email: string,
-  dispatch: Dispatch<Action<unknown>>
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>
 ) => {
   try {
     const res = await axios.post(`${link}/v1/user/forgot`, { email });
@@ -166,8 +186,13 @@ export const forgotPassword = async (
 };
 
 export const resetPassword = async (
-  data: any,
-  dispatch: Dispatch<Action<unknown>>,
+  data: {
+    activation_token: string | undefined;
+    password: string;
+    passwordConfirm: string;
+  },
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   navigate: NavigateFunction
 ) => {
   try {

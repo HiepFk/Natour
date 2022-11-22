@@ -1,4 +1,4 @@
-export const successAlert = (toast: any, msg: string) =>
+export const successAlert = (toast:any, msg: string) =>
   toast.success(`${msg}`, {
     position: "top-center",
     autoClose: 3000,

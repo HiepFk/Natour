@@ -4,7 +4,11 @@ interface TourType {
   tour: Tour | null;
 }
 
-const OverviewBox = (label: string, text: any, icon: string) => {
+const OverviewBox = (
+  label: string,
+  text: string | number | undefined,
+  icon: string
+) => {
   return (
     <div className="overview-box__detail">
       <svg className="overview-box__icon">

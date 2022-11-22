@@ -4,7 +4,6 @@ import Pictures from "./Pictures";
 import Reviews from "./Reviews";
 import Footer from "./Footer";
 import MapBox from "./MapBox";
-import Map from "./Map";
 import CreateReview from "./CreateReview";
 
 export {
@@ -14,6 +13,5 @@ export {
   Reviews,
   Footer,
   MapBox,
-  Map,
   CreateReview,
 };

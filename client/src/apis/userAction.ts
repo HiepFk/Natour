@@ -1,5 +1,10 @@
-import { Action, Dispatch } from "@reduxjs/toolkit";
-import axios, {AxiosInstance} from "axios";
+import {
+  AnyAction,
+  Dispatch,
+  EmptyObject,
+  ThunkDispatch,
+} from "@reduxjs/toolkit";
+import axios, { AxiosInstance } from "axios";
 import {
   GetMyOrderStart,
   GetMyOrderError,
@@ -15,7 +20,8 @@ const link = process.env.REACT_APP_API_LINK;
 
 export const ByTour = async (
   data: any,
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
@@ -32,7 +38,8 @@ export const ByTour = async (
 
 export const createReivew = async (
   data: any,
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
@@ -48,7 +55,8 @@ export const createReivew = async (
 };
 
 export const getMyOrder = async (
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {
@@ -63,7 +71,8 @@ export const getMyOrder = async (
   }
 };
 export const getMyReview = async (
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject, undefined, AnyAction> &
+    Dispatch<AnyAction>,
   axiosJWT: AxiosInstance,
   accessToken: string | undefined
 ) => {

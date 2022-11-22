@@ -1,4 +1,4 @@
-import { Action, Dispatch } from "@reduxjs/toolkit";
+import {AnyAction, Dispatch, EmptyObject, ThunkDispatch} from "@reduxjs/toolkit";
 import axios from "axios";
 import {
   GetListTourStart,
@@ -12,7 +12,7 @@ import {
 axios.defaults.withCredentials = true;
 const link = process.env.REACT_APP_API_LINK;
 
-export const getAllTour = async (dispatch: Dispatch<Action<unknown>>) => {
+export const getAllTour = async (dispatch: ThunkDispatch<EmptyObject , undefined, AnyAction> & Dispatch<AnyAction>) => {
   dispatch(GetListTourStart());
   try {
     const res = await axios.get(`${link}/v1/tour/`);
@@ -23,7 +23,7 @@ export const getAllTour = async (dispatch: Dispatch<Action<unknown>>) => {
 };
 
 export const getTour = async (
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject , undefined, AnyAction> & Dispatch<AnyAction>,
   id: string | undefined
 ) => {
   dispatch(GetTourStart());

@@ -1,10 +1,11 @@
-import { Action, Dispatch } from "@reduxjs/toolkit";
+import {AnyAction, Dispatch, EmptyObject, ThunkDispatch} from "@reduxjs/toolkit";
 import axios, {AxiosRequestConfig} from "axios";
 import jwt_decode from "jwt-decode";
 import { SetAlert } from "../redux/alertSlice";
 const link = process.env.REACT_APP_API_LINK;
 
-const refreshToken = async (dispatch: Dispatch<Action<unknown>>) => {
+const refreshToken = async (  dispatch: ThunkDispatch<EmptyObject , undefined, AnyAction> & Dispatch<AnyAction>,
+) => {
   try {
     const res = await axios.post(`${link}/v1/user/refresh`, {
       withCredentials: true,
@@ -18,7 +19,7 @@ const refreshToken = async (dispatch: Dispatch<Action<unknown>>) => {
 
 export const createAxios = (
   user: any,
-  dispatch: Dispatch<Action<unknown>>,
+  dispatch: ThunkDispatch<EmptyObject , undefined, AnyAction> & Dispatch<AnyAction>,
   stateSuccess: any
 ) => {
   const newInstance = axios.create();
